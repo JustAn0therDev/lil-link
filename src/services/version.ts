@@ -1,6 +1,5 @@
-export default {
-    getVersion: () => {
-        //TODO: pass this return value to dotenv
-        return "1.0"
+export default class VersionServices {
+    public getVersion(): string {
+        return "1.0";
     }
 }

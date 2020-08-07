@@ -1,8 +1,13 @@
 import { Router } from 'express'
-import version from './controllers/version'
+import VersionController from './controllers/version'
+import URLController from './controllers/url';
 
-const routes: Router = Router();
+const versionController = new VersionController();
+const urlController = new URLController();
+const routes = Router();
 
-routes.get('/version', version.get);
+routes.get('/', urlController.get);
+routes.get('/version', versionController.get);
+routes.post('/url', urlController.post);
 
 export default routes;

@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
-import service from '../services/version';
+import VersionService from '../services/version';
 
-export default {
-    get: (req: Request, res: Response) => {
-        return res.json({ version: service.getVersion() });
+const versionService = new VersionService();
+
+export default class VersionController {
+    public get(req: Request, res: Response): Response<any> {
+        return res.json({ version: versionService.getVersion() });
     }
 }
