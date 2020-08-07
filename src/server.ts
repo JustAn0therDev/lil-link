@@ -1,8 +1,7 @@
 const express = require('express');
+import expressTopLevelFunction from 'express';
 
-import express from 'express';
-
-const app = express()
+const app = expressTopLevelFunction()
 
 app.get('/', (req, res) =>
 {
