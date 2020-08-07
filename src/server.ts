@@ -1,11 +1,14 @@
-const express = require('express');
-import expressTopLevelFunction from 'express';
+import express from 'express';
+import cors from 'cors';
+import routes from './routes';
+import bodyParser from 'body-parser';
 
-const app = expressTopLevelFunction()
+const app = express();
 
-app.get('/', (req, res) =>
-{
-    return res.json({ json: "example" });
-})
+app.use(express.json());
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.listen(9000)
+app.use(routes);
+
+app.listen(9000);
