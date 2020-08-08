@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import URLValidator from '../validators/url';
+import URLServices from '../services/url';
+
+const urlServices = new URLServices();
 
 export default class URLController {
     public get(req: Request, res: Response) {
@@ -15,6 +18,6 @@ export default class URLController {
         if (!validationResult.isValid)
             return res.status(400).json(validationResult);
 
-        return res.status(201).json(validationResult);
+        return res.status(201).json(urlServices.createURL(req.body.url));
     }
 }

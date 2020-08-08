@@ -1,14 +1,22 @@
+import IURLValidationResult from '../validators/interfaces/IURLValidationResult'
+
 export default class URLServices {
-    public createURL(url: string): Boolean {
+    public createURL(url: string): IURLValidationResult {
         try {
-            //create URL
-            return true;
+            //TODO: create URL by writing to a file.
+            return {
+                isValid: true,
+                message: "URL successfully created."
+            };
         }
-        catch (error)
-        {
+        catch (error) {
+            let errorMessage = `Error during creation of URL: ${error}`;
             //log error to file
-            console.log(`Error during creation of URL: ${error}`);
-            return false;
+            console.log(errorMessage);
+            return {
+                isValid: false,
+                message: errorMessage
+            };
         }
     }
 }
