@@ -1,15 +1,16 @@
 import { Request, Response } from 'express';
 import URLValidator from '../validators/url';
 import URLServices from '../services/url';
+import IGetURLByUuidResponse from '../services/interfaces/IGetURLByUuidResponse';
 
 const urlServices = new URLServices();
 
 export default class URLController {
-    public get(req: Request, res: Response) {
-        //TODO: GET URLID FROM ROUTE PARAMS
+    public async get(req: Request, res: Response): Promise<Response<any>> {
+        const response: IGetURLByUuidResponse = await urlServices.getURL(req.route.uuid)
+        return res.status(response.url ? 200 : 302).json(response)
     }
 
-    //This method creates a URL in the URL File/Database
     public post(req: Request, res: Response): Response<any> {
         const urlValidator = new URLValidator(req.body.url);
 
