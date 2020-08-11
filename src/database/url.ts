@@ -10,11 +10,7 @@ export default class Url {
     //TODO: dotenv.
     constructor() { this.fileName = "database.txt" }
 
-    public async getURLByUuid(uuid: string): Promise<IUrlResponse> {
-        return await this.getURLFromFile(uuid)
-    }
-
-    private async getURLFromFile(uuid: string): Promise<IUrlResponse> {
+    public async getURLFromFile(uuid: string): Promise<IUrlResponse> {
         const lineReader = readline.createInterface({ input: fs.createReadStream(this.fileName) })
         
         let url = ''
