@@ -5,7 +5,7 @@ export default class UrlUtils {
         return uuidv1().split('-')[0]
     }
 
-    public static removeWhiteSpacesFromUrl(url: string) {
+    public static removeWhiteSpacesFromUrl(url: string): string {
         return url.replace(/\s/g, '')
     }
 }

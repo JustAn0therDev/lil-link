@@ -1,24 +1,14 @@
-import IURLValidationResult from '../validators/interfaces/IURLValidationResult'
-import IGetURLByUuidResponse from '../services/interfaces/IGetURLByUuidResponse'
 import Url from '../database/url'
+import IUrlResponse from '../validators/interfaces/IUrlResponse'
 
-const urlDatabase = new Url()
+const urlInterfaceToDatabase = new Url()
 
-export default class URLServices {
-    public async getURL(uuid: string): Promise<IGetURLByUuidResponse> {
-        const url = await urlDatabase.getURLByUuid(uuid)
-        return {
-            url,
-            message: "URL retrieved successfully."
-        }
+export default class UrlServices {
+    public async getURL(uuid: string): Promise<IUrlResponse> {
+        return await urlInterfaceToDatabase.getURLByUuid(uuid)
     }
 
-    public createURL(url: string): IURLValidationResult {
-        const id = urlDatabase.writeURL(url);
-        return {
-            isValid: id ? true : false,
-            message: "URL successfully created.",
-            id
-        }
+    public async createURL(url: string): Promise<IUrlResponse> {
+        return await urlInterfaceToDatabase.writeURL(url);
     }
 }

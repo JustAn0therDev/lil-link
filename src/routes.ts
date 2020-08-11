@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import VersionController from './controllers/version'
-import URLController from './controllers/url';
+import URLController from './controllers/url'
 
 const versionController = new VersionController();
 const urlController = new URLController();
