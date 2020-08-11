@@ -7,14 +7,14 @@ const urlServices = new URLServices();
 
 export default class URLController {
     public async get(req: Request, res: Response): Promise<Response<any>> {
-        const response: IGetURLByUuidResponse = await urlServices.getURL(req.route.uuid)
+        const response: IGetURLByUuidResponse = await urlServices.getURL(req.params.uuid)
+
         return res.status(response.url ? 200 : 302).json(response)
     }
 
     public post(req: Request, res: Response): Response<any> {
         const urlValidator = new URLValidator(req.body.url);
-
-        let validationResult = urlValidator.urlIsNotEmpty(true);
+        let validationResult = urlValidator.urlIsNotEmpty();
 
         if (!validationResult.isValid)
             return res.status(400).json(validationResult);

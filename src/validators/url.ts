@@ -7,20 +7,12 @@ export default class URLValidator {
         this.url = url;
     }
 
-    public urlIsNotEmpty(creation: boolean): IURLValidationResult {
+    public urlIsNotEmpty(): IURLValidationResult {
         if (!this.url)
             return {
                 isValid: false,
-                message: "URL is empty"
+                message: "Invalid URL"
             };
-
-        if (!creation)
-        {
-            return {
-                isValid: true,
-                message: "URL is not empty"
-            }
-        }
         
         return {
             isValid: true,
