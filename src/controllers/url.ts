@@ -1,14 +1,12 @@
 import UrlServices from '../services/url'
 import { Request, Response } from 'express'
 import UrlValidator from '../validators/url'
-import IUrlResponse from '../validators/interfaces/IUrlResponse'
-
-const urlServices = new UrlServices();
+import IUrlResponse from '../interfaces/IUrlResponse'
 
 export default class UrlController {
     public async get(req: Request, res: Response): Promise<Response<any>> {
         try {
-            const response: IUrlResponse = await urlServices.getURL(req.params.uuid)
+            const response: IUrlResponse = await new UrlServices().getURL(req.params.uuid)
             return res.status(response.url ? 200 : 204).json(response)
         }
         catch (error) {
@@ -23,8 +21,7 @@ export default class UrlController {
             if (validationResult.message.toLowerCase().includes("invalid"))
                 return res.status(400).json(validationResult)
     
-            const response: IUrlResponse = await urlServices.createURL(req.body.url)
-    
+            const response: IUrlResponse = await new UrlServices().createURL(req.body.url)
             return res.status(201).json(response)
         }
         catch (error) {
