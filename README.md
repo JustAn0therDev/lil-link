@@ -17,9 +17,9 @@ how the implementation of a database should be made, it won't affect any other c
 ## API Routes
 
 There are three routes in the API. 
+- `/version` | GET | Returns the current version of the API inside a "version" key. 
 - `/url` | POST | Will save the requested URL that was sent in a JSON body. The URL will be validated and return the `HTTP Status 400` if not valid.
 - `/urlId` | GET | This route will receive a route parameter (the `urlId` that was returned when you requested to create an ID) and return a response that should be either a valid URL or only a message if the URL was not found.
-- `/version` | GET | Returns the current version of the API inside a "version" key. 
 
 Except for the version route, both subsequent routes have the same response format: A JSON including a message and either an URL if requested with an Id or vice-versa.
 
