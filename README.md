@@ -9,8 +9,6 @@ a client must implement this feature manually, which will be done in the near fu
 For the "database", I'm using a simple `.txt` file that stores a part of an `uuid` and saves it as "key value" in the file (e.g. `uuid url`), separating each "key value" by "\n" characters. For the worst case in a search (for
 a recently registered URL, which will be the last record in the file), the complexity of a search will be `O(N)`, "N" being the number of records in the file (I'll make it better).
 
-The odds of a part of an `uuid` being the same is validated as well, so if it does happen, the API will return an error prompting the client to request another ID for that URL.
-
 I might try using MongoDB for this, since it's a pretty straight forward implementation and usage. I also tried as much as I could to make all of the logic of persisting the 
 `uuid` and URL data separated from the classes that should only be an interface between the database and the controllers and from the routes and other configurations, so when it comes to changing
 how the implementation of a database should be made, it won't affect any other class.
@@ -19,9 +17,9 @@ how the implementation of a database should be made, it won't affect any other c
 ## API Routes
 
 There are three routes in the API. 
+- `/version` | GET | Returns the current version of the API inside a "version" key. 
 - `/url` | POST | Will save the requested URL that was sent in a JSON body. The URL will be validated and return the `HTTP Status 400` if not valid.
 - `/urlId` | GET | This route will receive a route parameter (the `urlId` that was returned when you requested to create an ID) and return a response that should be either a valid URL or only a message if the URL was not found.
-- `/version` | GET | Returns the current version of the API inside a "version" key. 
 
 Except for the version route, both subsequent routes have the same response format: A JSON including a message and either an URL if requested with an Id or vice-versa.
 
