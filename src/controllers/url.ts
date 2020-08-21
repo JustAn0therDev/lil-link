@@ -6,7 +6,7 @@ import IUrlResponse from '../interfaces/IUrlResponse'
 export default class UrlController {
     public async get(req: Request, res: Response): Promise<Response<any>> {
         try {
-            const response: IUrlResponse = await new UrlServices().getURL(req.params.uuid)
+            const response: IUrlResponse = new UrlServices().getURL(req.params.uuid)
             return res.status(response.url ? 200 : 204).json(response)
         }
         catch (error) {
