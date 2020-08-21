@@ -1,28 +1,24 @@
-import { Sequelize } from 'sequelize'
+import knex from 'knex'
 import UrlUtils from '../utils/url'
+import databaseConnection from './databaseConnection'
 import IUrlResponse from '../interfaces/IUrlResponse'
 
 export default class UrlDatabase {
-    public dbConnection: Sequelize
+    private db: knex
 
     constructor() { 
-        this.dbConnection = new Sequelize('database.db')
+        this.db = databaseConnection
      }
 
-    public getURLFromFile(uuid: string): IUrlResponse {
-        var url = ''
-
-        return UrlUtils.createResponseFromRetrivedUrl(url)
+    public async getUrlByUuid(uuid: string): Promise<IUrlResponse> {
+        const returnFromDatabase = await this.db('urls').select('url').where('uuid', uuid).first()
+        return UrlUtils.createResponseFromRetrivedUrl(returnFromDatabase.url)
     }
 
-    public async writeURL(id: string, url: string): Promise<IUrlResponse> {
-        this.insertInDatabase(id, url)
+    public async insertUrl(id: string, url: string): Promise<IUrlResponse> {
+        await this.db('urls').insert({ uuid: id, url })
         return {
-            id,
-            message: "Shortened URL successfully generated."
+            id, message: "Shortened URL successfully generated."
         }
-    }
-
-    private insertInDatabase(id: string, url: string): void {
     }
 }

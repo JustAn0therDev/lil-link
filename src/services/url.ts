@@ -3,17 +3,17 @@ import UrlDatabase from '../database/url'
 import IUrlResponse from '../interfaces/IUrlResponse'
 
 export default class UrlServices {
-    public getURL(uuid: string): IUrlResponse {
+    public async getUrl(uuid: string): Promise<IUrlResponse> {
         const urlInterfaceToDatabase = new UrlDatabase()
-        return urlInterfaceToDatabase.getURLFromFile(uuid)
+        return await urlInterfaceToDatabase.getUrlByUuid(uuid)
     }
 
-    public async createURL(url: string): Promise<IUrlResponse> {
+    public async createUrl(url: string): Promise<IUrlResponse> {
         const urlInterfaceToDatabase = new UrlDatabase()
 
         let id = UrlUtils.getOnlyFirstPartOfId()
         url = UrlUtils.removeWhiteSpacesFromUrl(url)
 
-        return await urlInterfaceToDatabase.writeURL(id, url);
+        return await urlInterfaceToDatabase.insertUrl(id, url);
     }
 }

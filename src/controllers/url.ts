@@ -6,11 +6,12 @@ import IUrlResponse from '../interfaces/IUrlResponse'
 export default class UrlController {
     public async get(req: Request, res: Response): Promise<Response<any>> {
         try {
-            const response: IUrlResponse = new UrlServices().getURL(req.params.uuid)
+            const response: IUrlResponse = await new UrlServices().getUrl(req.params.uuid)
             return res.status(response.url ? 200 : 204).json(response)
         }
         catch (error) {
-            return res.status(500).json({ message: error })
+            console.log(error)
+            return res.status(500).json(JSON.stringify(await error))
         }
     }
 
@@ -21,7 +22,7 @@ export default class UrlController {
             if (validationResult.message.toLowerCase().includes("invalid"))
                 return res.status(400).json(validationResult)
     
-            const response: IUrlResponse = await new UrlServices().createURL(req.body.url)
+            const response: IUrlResponse = await new UrlServices().createUrl(req.body.url)
             return res.status(201).json(response)
         }
         catch (error) {
