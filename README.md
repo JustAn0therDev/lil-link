@@ -4,15 +4,12 @@ A URL shortener made with TypeScript
 This URL shortener is just an API that creates an ID for the requested URL and returns it to the user. As far as I know for the redirection itself, 
 a client must implement this feature manually, which will be done in the near future. 
 
-## "Database"
+## Database
 
-For the "database", I'm using a simple `.txt` file that stores a part of an `uuid` and saves it as "key value" in the file (e.g. `uuid url`), separating each "key value" by "\n" characters. For the worst case in a search (for
-a recently registered URL, which will be the last record in the file), the complexity of a search will be `O(N)`, "N" being the number of records in the file (I'll make it better).
+For the database, I used to have a simple database.txt file that I would store the `uuid` and `url` as key-value-pairs. Not only for the _obvious_ impacts of it, the lookup for a url
+since I had to look line by line in the file was `O(N)`. Needless to say that was not optimal so I decided to go with a database that could be quicker to lookup records in and pretty simple to implement, and that's when I decided to go with SQLite (friendly reminder that this is only a personal project, so if needed do NOT use a local database to store this type of information, since it will have stuff you'll want to have more control over).
 
-I might try using MongoDB for this, since it's a pretty straight forward implementation and usage. I also tried as much as I could to make all of the logic of persisting the 
-`uuid` and URL data separated from the classes that should only be an interface between the database and the controllers and from the routes and other configurations, so when it comes to changing
-how the implementation of a database should be made, it won't affect any other class.
-
+The "database.db" file in the root path was created with the DB Browser (although you can use whatever you like), I created a `urls` table with the columns `urlId`, `uuid` and `url`. An index was created for the `uuid` to make the search even faster, since the default lookup method is a linear `O(N)` (so with an index the lookup space-time complexity with be `O(log(N))` with B-trees).
 
 ## API Routes
 
