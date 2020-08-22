@@ -11,6 +11,8 @@ since I had to look line by line in the file was `O(N)`. Needless to say that wa
 
 The "database.db" file in the root path was created with the DB Browser (although you can use whatever you like), I created a `urls` table with the columns `urlId`, `uuid` and `url`. An index was created for the `uuid` to make the search even faster, since the default lookup method is a linear `O(N)` (so with an index the lookup space-time complexity with be `O(log(N))` with B-trees).
 
+The database model/business rules class is separated from everything else with it's respective folder, so if you want, you can implement another database without impacting the rest of the API's implementation.
+
 ## API Routes
 
 There are three routes in the API. 
