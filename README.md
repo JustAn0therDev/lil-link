@@ -24,6 +24,6 @@ Except for the version route, both subsequent routes have the same response form
 
 ## Running locally
 
-Just run `npm install` and configure it as you want (might want to create a database.txt file for this version as well, I had problems with the node `fs` module when trying to write to a file that didn't exist even though the docs say it should create a file if it doesn't find one).
+Just run `npm install` and configure it as you want. The project already has a "database.db" sample file so you can use it if you want, just make sure to clean up the table and you're good to go.
 
 As always, if you have any suggestions you can contact me or pull request/fork as you like.
