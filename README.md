@@ -2,7 +2,7 @@
 A URL shortener made with TypeScript
 
 This URL shortener is just an API that creates an ID for the requested URL and returns it to the user. As far as I know for the redirection itself, 
-a client must implement this feature manually, which will be done in the near future. 
+a client must implement this feature manually, which will be done in the near future by implementing a page where the redirect should be done as soon as the client requests the link.
 
 ## Database
 
