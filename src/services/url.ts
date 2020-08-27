@@ -11,9 +11,9 @@ export default class UrlServices {
     public async createUrl(url: string): Promise<IUrlResponse> {
         const urlInterfaceToDatabase = new UrlDatabase()
 
-        let id = UrlUtils.getOnlyFirstPartOfId()
+        const id = UrlUtils.getOnlyFirstPartOfId()
         url = UrlUtils.removeWhiteSpacesFromUrl(url)
 
-        return await urlInterfaceToDatabase.insertUrl(id, url);
+        return await urlInterfaceToDatabase.insertUrl(id, url)
     }
 }

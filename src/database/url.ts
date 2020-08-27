@@ -11,7 +11,7 @@ export default class UrlDatabase {
      }
 
     public async getUrlByUuid(uuid: string): Promise<IUrlResponse> {
-        const returnFromDatabase = await this.db('urls').select('url').where('uuid', uuid).first()
+        const returnFromDatabase = await this.db('urls').select('url').where('uuid', uuid).orderBy("urlId", "desc").first()
         return UrlUtils.createResponseFromRetrivedUrl(returnFromDatabase.url)
     }
 
