@@ -10,14 +10,13 @@ export default class UrlController {
             return res.status(response.url ? 200 : 204).json(response)
         }
         catch (error) {
-            console.log(error)
             return res.status(500).json({ message: error })
         }
     }
 
     public async post(req: Request, res: Response): Promise<Response<IUrlResponse>> {
         try {
-            let validationResult: IUrlResponse = UrlValidator.validateUrl(req.body.url)
+            const validationResult: IUrlResponse = UrlValidator.validateUrl(req.body.url)
     
             if (validationResult.message.includes("Invalid"))
                 return res.status(400).json(validationResult)
