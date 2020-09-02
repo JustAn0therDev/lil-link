@@ -15,7 +15,7 @@ The database model/business rules class is separated from everything else with i
 
 ## API Routes
 
-There are three routes in the API. 
+There are currently three routes in the API. 
 - `/version` | GET | Returns the current version of the API inside a "version" key. 
 - `/url` | POST | Will save the requested URL that was sent in a JSON body. The URL will be validated and return the `HTTP Status 400` if not valid.
 - `/urlId` | GET | This route will receive a route parameter (the `urlId` that was returned when you requested to create an ID) and return a response that should be either a valid URL or only a message if the URL was not found.
